@@ -15,13 +15,15 @@
     }
 
     :root {
+      /* Dynamic Flare Color - Defaults to white */
+      --flare-color: 255, 255, 255;
+      
       --sunrise-top: #0f0c29;
       --sunrise-mid: #302b63;
       --sunrise-low: #24243e;
       --glass: rgba(255, 255, 255, 0.12);
       --glass-border: rgba(255, 255, 255, 0.2);
       --online: #22c55e;
-      /* European Flag Colors */
       --eu-blue: #868eff;
       --eu-yellow: #ffe57d;
     }
@@ -47,11 +49,12 @@
       height: 120vmax;
       margin-left: -60vmax;
       margin-top: -60vmax;
+      /* Uses the dynamic --flare-color variable */
       background: radial-gradient(
         circle,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0.12) 25%,
-        rgba(255, 255, 255, 0.04) 50%,
+        rgba(var(--flare-color), 0.35) 0%,
+        rgba(var(--flare-color), 0.12) 25%,
+        rgba(var(--flare-color), 0.04) 50%,
         transparent 70%
       );
       filter: blur(80px);
@@ -59,6 +62,7 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0;
+      transition: background 1s ease; /* Smooth transition if color changes */
       animation: flare-in 1.4s ease-out 0.2s forwards;
     }
 
@@ -179,7 +183,6 @@
       font-weight: 500;
     }
 
-    /* European Flag Styling */
     .eu-blue { color: var(--eu-blue); font-weight: 700; }
     .eu-yellow { color: var(--eu-yellow); font-weight: 700; }
 
@@ -190,7 +193,7 @@
     <h1 class="title">@Flares</h1>
 
     <div class="avatar-wrap">
-      <img class="avatar" id="avatar" src="https://cdn.discordapp.com/avatars/1396319866205638727/8ee297d34702e66f83e748212df95257.png?size=256" alt="Profile" />
+      <img class="avatar" id="avatar" src="https://cdn.discordapp.com/avatars/1396319866205638727/8ee297d34702e66f83e748212df95257.png?size=256" alt="Profile" crossorigin="anonymous" />
       <span class="status" title="Online"></span>
     </div>
 
@@ -217,6 +220,7 @@
 
   <script>
     (function () {
+      // 1. Age Calculation (Existing)
       const birthDate = new Date('2011-05-24');
       const bioElement = document.getElementById('bio-text');
 
@@ -227,15 +231,60 @@
         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
           age--;
         }
-        
-        // Custom colored HTML for Europe
         const coloredEurope = `<span class="eu-blue">Eu</span><span class="eu-yellow">ro</span><span class="eu-blue">pe</span>`;
         bioElement.innerHTML = `${age} Years old, Based in ${coloredEurope}`;
       }
-
       calculateAge();
 
+      // 2. Dynamic Color Extraction
       const img = document.getElementById('avatar');
+
+      function updateFlareColor() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Use small size for performance (we just need general color)
+        canvas.width = 50;
+        canvas.height = 50;
+        
+        ctx.drawImage(img, 0, 0, 50, 50);
+        const imageData = ctx.getImageData(0, 0, 50, 50).data;
+        
+        let bestRgb = [255, 255, 255];
+        let maxSaturation = -1;
+
+        for (let i = 0; i < imageData.length; i += 4) {
+          const r = imageData[i];
+          const g = imageData[i + 1];
+          const b = imageData[i + 2];
+          const a = imageData[i + 3];
+
+          if (a < 128) continue; // Skip transparent
+
+          // Simple saturation calculation: max(rgb) - min(rgb)
+          const max = Math.max(r, g, b);
+          const min = Math.min(r, g, b);
+          const saturation = max - min;
+
+          // Find the color that is most "vivid"
+          if (saturation > maxSaturation) {
+            maxSaturation = saturation;
+            bestRgb = [r, g, b];
+          }
+        }
+
+        // Apply to CSS Variable
+        document.documentElement.style.setProperty('--flare-color', `${bestRgb[0]}, ${bestRgb[1]}, ${bestRgb[2]}`);
+      }
+
+      // Trigger when image loads
+      if (img.complete) {
+        updateFlareColor();
+      } else {
+        img.addEventListener('load', updateFlareColor);
+      }
+
+      // Proxy handling (Existing)
       const yourAvatarUrl = 'https://cdn.discordapp.com/avatars/1396319866205638727/8ee297d34702e66f83e748212df95257.png?size=256';
       const proxy = 'https://wsrv.nl/?url=';
 
