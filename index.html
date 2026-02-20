@@ -1,303 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Club</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      /* Dynamic Flare Color - Defaults to white */
-      --flare-color: 255, 255, 255;
-      
-      --sunrise-top: #0f0c29;
-      --sunrise-mid: #302b63;
-      --sunrise-low: #24243e;
-      --glass: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --online: #22c55e;
-      --eu-blue: #868eff;
-      --eu-yellow: #ffe57d;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: 'Outfit', sans-serif;
-      background: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      width: 120vmax;
-      height: 120vmax;
-      margin-left: -60vmax;
-      margin-top: -60vmax;
-      /* Uses the dynamic --flare-color variable */
-      background: radial-gradient(
-        circle,
-        rgba(var(--flare-color), 0.35) 0%,
-        rgba(var(--flare-color), 0.12) 25%,
-        rgba(var(--flare-color), 0.04) 50%,
-        transparent 70%
-      );
-      filter: blur(80px);
-      -webkit-filter: blur(80px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: background 1s ease; /* Smooth transition if color changes */
-      animation: flare-in 1.4s ease-out 0.2s forwards;
-    }
-
-    @keyframes flare-in {
-      from { opacity: 0; transform: scale(0.85); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 420px;
-      padding: 2.5rem;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 24px;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
-      text-align: center;
-      opacity: 0;
-      transform: scale(0.88) translateY(24px);
-      animation: card-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
-    }
-
-    @keyframes card-pop {
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    .title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.5rem;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 1.25rem;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .status {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      width: 24px;
-      height: 24px;
-      background: var(--online);
-      border-radius: 50%;
-      border: 3px solid #1a1a1a;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.4); }
-      50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.15); }
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
-
-    .link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1rem 1.5rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 14px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-
-    .link:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: translateY(-2px);
-    }
-
-    .link svg { width: 22px; height: 22px; }
-
-    .updates {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      text-align: left;
-    }
-
-    .updates-title {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.7);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .updates p {
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    .eu-blue { color: var(--eu-blue); font-weight: 700; }
-    .eu-yellow { color: var(--eu-yellow); font-weight: 700; }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flaresssss.club</title>
+    <link rel="icon" type="image/png" href="i.png">
+    <link rel="shortcut icon" type="image/png" href="i.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #000000;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Minecraft', 'minecraft', 'Minecraftia', 'Courier New', monospace;
+        }
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+        @font-face {
+            font-family: 'minecraft';
+            src: url('minecraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+        .placeholder-text {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: normal;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            text-rendering: geometricPrecision;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1 class="title">@Flares</h1>
-
-    <div class="avatar-wrap">
-      <img class="avatar" id="avatar" src="https://images-ext-1.discordapp.net/external/6zYDK1wO9bf-ef0VjgqUhyzAwWNvQYoyno8OcbPixuw/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/1456694580551352463/e28ae669117cdfef63a1ffecef518ff5.png?format=webp&quality=lossless&width=953&height=953" alt="Profile" crossorigin="anonymous" />
-      <span class="status" title="Online"></span>
-    </div>
-
-    <div class="updates">
-      <div class="updates-title">About me</div>
-      <p id="bio-text">Loading details...</p>
-    </div>
-
-    <div class="links">
-      <a class="link" href="https://www.youtube.com/channel/UCawHoonRHZRg4oQDiUAlppQ" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
-      <a class="link" href="https://github.com/flaresified" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 2.295-1.23 2.295-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
-      </a>
-      <a class="link" href="https://www.linkedin.com/in/clarify/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        LinkedIn
-      </a>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      // 1. Age Calculation (Existing)
-      const birthDate = new Date('2011-05-24');
-      const bioElement = document.getElementById('bio-text');
-
-      function calculateAge() {
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-          age--;
-        }
-        const coloredEurope = `<span class="eu-blue">Eu</span><span class="eu-yellow">ro</span><span class="eu-blue">pe</span>`;
-        bioElement.innerHTML = `${age} Years old, Based in ${coloredEurope}`;
-      }
-      calculateAge();
-
-      // 2. Dynamic Color Extraction
-      const img = document.getElementById('avatar');
-
-      function updateFlareColor() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Use small size for performance (we just need general color)
-        canvas.width = 50;
-        canvas.height = 50;
-        
-        ctx.drawImage(img, 0, 0, 50, 50);
-        const imageData = ctx.getImageData(0, 0, 50, 50).data;
-        
-        let bestRgb = [255, 255, 255];
-        let maxSaturation = -1;
-
-        for (let i = 0; i < imageData.length; i += 4) {
-          const r = imageData[i];
-          const g = imageData[i + 1];
-          const b = imageData[i + 2];
-          const a = imageData[i + 3];
-
-          if (a < 128) continue; // Skip transparent
-
-          // Simple saturation calculation: max(rgb) - min(rgb)
-          const max = Math.max(r, g, b);
-          const min = Math.min(r, g, b);
-          const saturation = max - min;
-
-          // Find the color that is most "vivid"
-          if (saturation > maxSaturation) {
-            maxSaturation = saturation;
-            bestRgb = [r, g, b];
-          }
-        }
-
-        // Apply to CSS Variable
-        document.documentElement.style.setProperty('--flare-color', `${bestRgb[0]}, ${bestRgb[1]}, ${bestRgb[2]}`);
-      }
-
-      // Trigger when image loads
-      if (img.complete) {
-        updateFlareColor();
-      } else {
-        img.addEventListener('load', updateFlareColor);
-      }
-
-      // Proxy handling (Existing)
-      const yourAvatarUrl = 'https://cdn.discordapp.com/avatars/1396319866205638727/8ee297d34702e66f83e748212df95257.png?size=256';
-      const proxy = 'https://wsrv.nl/?url=';
-
-      img.onerror = function () {
-        this.onerror = null;
-        if (!this.dataset.triedProxy) {
-          this.dataset.triedProxy = '1';
-          this.src = proxy + encodeURIComponent(yourAvatarUrl);
-        }
-      };
-    })();
-  </script>
+    <div class="placeholder-text">Placeholder</div>
 </body>
 </html>
-
-
