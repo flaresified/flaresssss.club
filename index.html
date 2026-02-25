@@ -1,56 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flaresssss.club</title>
-    <link rel="icon" type="image/png" href="i.png">
-    <link rel="shortcut icon" type="image/png" href="i.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlaresClub</title>
+
+    <!-- Invisible Favicon - Transparent 1x1 pixel -->
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" />
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" />
+    
+    <!-- Also hide any default browser favicon requests -->
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+
+    <!-- Google Fonts -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      :root {
+        --bg: #f7f9fc;
+        --fg: #0f172a;
+        --muted: #64748b;
+        --accent: #ef4444;
+        --card-bg: #ffffff;
+        --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.18);
+        --radius-xl: 28px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top left, #ffffff, var(--bg));
+        color: var(--fg);
+      }
+
+      .shell {
+        width: 100%;
+        max-width: 1120px;
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.9),
+            rgba(248, 250, 252, 0.9)
+          );
+        border-radius: 32px;
+        box-shadow: 0 22px 70px rgba(15, 23, 42, 0.18);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        padding: 32px 32px 36px;
+        backdrop-filter: blur(22px);
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        gap: 16px;
+      }
+
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #e11d48;
+      }
+
+      .dot:nth-child(2) {
+        background: #eab308;
+      }
+
+      .dot:nth-child(3) {
+        background: #22c55e;
+      }
+
+      .top-bar-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--muted);
+      }
+
+      .pill {
+        padding: 5px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      @media (max-width: 800px) {
+        .shell {
+          padding: 24px 20px 28px;
         }
-        html, body {
-            width: 100%;
-            min-height: 100vh;
-            background-color: #000000;
+
+        .main {
+          flex-direction: column;
+          align-items: stretch;
         }
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Minecraft', 'minecraft', 'Minecraftia', 'Courier New', monospace;
+
+        .right {
+          align-self: center;
         }
-        @font-face {
-            font-family: 'Minecraft';
-            src: url('minecraft.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: block;
-        }
-        @font-face {
-            font-family: 'minecraft';
-            src: url('minecraft.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: block;
-        }
-        .placeholder-text {
-            color: #ffffff;
-            font-size: 2rem;
-            font-weight: normal;
-            text-align: center;
-            line-height: 1.2;
-            letter-spacing: 0.02em;
-            text-rendering: geometricPrecision;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+      }
+
+      .left {
+        flex: 1.2;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transform: translateX(-12px);
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .title {
+        font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: clamp(40px, 5vw, 56px);
+        font-weight: 700;
+        letter-spacing: -0.06em;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        line-height: 0.98;
+        will-change: transform, letter-spacing;
+        transition:
+          transform 0.18s cubic-bezier(0.22, 0.61, 0.36, 1),
+          letter-spacing 0.18s cubic-bezier(0.22, 0.61, 0.36, 1),
+          text-shadow 0.18s ease-out;
+      }
+
+      .title span.accent {
+        color: transparent;
+        background-image: linear-gradient(120deg, #f97316, #ec4899, #ef4444);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      .title::after {
+        content: "";
+        position: absolute;
+        inset: 55% -6px -8px;
+        background: radial-gradient(
+          circle at left,
+          rgba(248, 113, 113, 0.16),
+          transparent 60%
+        );
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.18s ease-out,
+          transform 0.18s ease-out;
+        pointer-events: none;
+      }
+
+      .title-fast-variation:hover .title {
+        transform: translateY(-1px) scale(1.01);
+        letter-spacing: -0.1em;
+        text-shadow: 0 18px 40px rgba(15, 23, 42, 0.36);
+      }
+
+      .title-fast-variation:hover .title::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .subtitle {
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .meta {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+  
+ 
+
+      .right {
+        flex: 0.9;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .yt-card {
+        width: 220px;
+        max-width: 70vw;
+        aspect-ratio: 16 / 11;
+        border-radius: var(--radius-xl);
+        background: radial-gradient(circle at top, #fef2f2, #fee2e2);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(254, 226, 226, 0.9);
+        overflow: hidden;
+      }
+
+
+
+
+    
+
+      .yt-icon-wrap {
+        width: 120px;
+        height: 84px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow:
+          0 24px 55px rgba(220, 38, 38, 0.62),
+          0 0 0 1px rgba(248, 250, 252, 0.6);
+      }
+
+      .yt-icon-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 24px;
+        border: 1px solid rgba(254, 242, 242, 0.45);
+      }
+
+      .yt-icon {
+        width: 42px;
+        height: 30px;
+        fill: #f9fafb;
+      }
+
+      .glow-orbit {
+        position: absolute;
+        width: 220%;
+        height: 220%;
+        border-radius: 50%;
+        border: 1px solid rgba(248, 250, 252, 0.4);
+        opacity: 0.45;
+        mix-blend-mode: screen;
+        transform: rotate(-14deg);
+      }
     </style>
-</head>
-<body>
-    <div class="placeholder-text">Placeholder</div>
-</body>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="top-bar-label"></div>
+        <div class="pill"></div>
+      </div>
+
+      <div class="main">
+        <div class="left">
+          <div class="eyebrow"></div>
+          <div class="title-fast-variation">
+            <div class="title">
+              <span>Flares</span><span class="accent">Club</span>
+            </div>
+          </div>
+          <div class="subtitle">placeholder site</div>
+          <div class="meta">
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="yt-card">
+            <div class="glow-orbit"></div>
+            <div class="yt-icon-wrap">
+              <svg
+                class="yt-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M21.6 7.2a2.53 2.53 0 0 0-1.78-1.79C18.24 5 12 5 12 5s-6.24 0-7.82.41A2.53 2.53 0 0 0 2.4 7.2 26.58 26.58 0 0 0 2 12a26.58 26.58 0 0 0 .4 4.8 2.53 2.53 0 0 0 1.78 1.79C5.76 19 12 19 12 19s6.24 0 7.82-.41a2.53 2.53 0 0 0 1.78-1.79A26.58 26.58 0 0 0 22 12a26.58 26.58 0 0 0-.4-4.8zM10.2 15.02V8.98L15.27 12z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
